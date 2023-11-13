@@ -532,10 +532,10 @@ async def get_tutorial(chat_id):
         
 async def get_verify_shorted_link(link):
 
-    if VERIFY == False:
-        return f'{link}'
-    else: 
-         pass
+  #  if VERIFY == False:
+   #     return f'{link}'
+ #   else: 
+    #     pass
     
     API = SHORTLINK_API
     URL = SHORTLINK_URL
@@ -581,6 +581,15 @@ async def get_verify_shorted_link(link):
         except Exception as e:
             logger.error(e)
             return f'{URL}/api?api={API}&link={link}'
+
+async def get_verify_link(bot, userid, token, link):
+    VERIFY = bool(environ.get('VERIFY', False))
+
+    if VERIFY is False:
+    return f'https://telegram.me/{temp.U_NAME}?start=verify-{user.id}-{token}'
+
+    else:
+    return get_verify_shorted_link(link)
 
 async def check_token(bot, userid, token):
     user = await bot.get_users(userid)
